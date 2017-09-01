@@ -134,11 +134,11 @@ void remove_realm_files_from_directory(const std::string &dir_path)
     }
 }
 
-static void remove_directory(const std::string &path)
+void remove_directory(const std::string &path)
 {
     FileSystemRequest exists_req;
-    if(uv_fs_stat(uv_default_loop(), &exists_req, path.c_str(), nullptr) != 0) {
-        if(exists_req.result == UV_ENOENT) {
+    if (uv_fs_stat(uv_default_loop(), &exists_req, path.c_str(), nullptr) != 0) {
+        if (exists_req.result == UV_ENOENT) {
             // path doesn't exist, ignore
             return;
         } else {
@@ -167,11 +167,11 @@ static void remove_directory(const std::string &path)
 }
 
 
-static void remove_file(const std::string &path)
+void remove_file(const std::string &path)
 {
     FileSystemRequest exists_req;
-    if(uv_fs_stat(uv_default_loop(), &exists_req, path.c_str(), nullptr) != 0) {
-        if(exists_req.result == UV_ENOENT) {
+    if (uv_fs_stat(uv_default_loop(), &exists_req, path.c_str(), nullptr) != 0) {
+        if (exists_req.result == UV_ENOENT) {
             // path doesn't exist, ignore
             return;
         } else {
@@ -183,14 +183,6 @@ static void remove_file(const std::string &path)
     if (uv_fs_unlink(uv_default_loop(), &delete_req, path.c_str(), nullptr) != 0) {
         throw UVException(static_cast<uv_errno_t>(delete_req.result));
     }
-}
-
-void remove_realm_files(const std::string &path)
-{
-    remove_file(path);
-    remove_file(path + ".lock");
-    remove_file(path + ".note");
-    remove_directory(path + ".management");
 }
 
 } // realm

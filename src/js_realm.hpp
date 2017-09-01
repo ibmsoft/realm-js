@@ -551,7 +551,12 @@ void RealmClass<T>::delete_file(ContextType ctx, FunctionType, ObjectType this_o
 
     config.path = normalize_realm_path(config.path);
 
-    realm::remove_realm_files(config.path);
+    std::string realm_file_path = config.path;
+    realm::remove_file(realm_file_path);
+    realm::remove_file(realm_file_path + ".lock");
+    realm::remove_file(realm_file_path + ".note");
+    realm::remove_directory(realm_file_path + ".management");
+
 }
 
 template<typename T>

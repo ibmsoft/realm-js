@@ -41,7 +41,10 @@ void copy_bundled_realm_files();
 // remove all realm files in the given directory
 void remove_realm_files_from_directory(const std::string &directory);
 
-// remove realm files for the given config path
-void remove_realm_files(const std::string &path);
+// remove file at the given path
+void remove_file(const std::string &path);
+
+// remove directory at the given path
+void remove_directory(const std::string &path);
 
 }

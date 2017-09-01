@@ -94,7 +94,7 @@ namespace realm {
         system(cmd.c_str());
     }
 
-    static void remove_directory(const std::string &path)
+    void remove_directory(const std::string &path)
     {
         std::string cmd_clear_dir = "rm " + path + "/*";
         system(cmd_clear_dir.c_str());
@@ -103,17 +103,9 @@ namespace realm {
         system(cmd_rmdir.c_str());
     }
 
-    static void remove_file(const std::string &path)
+    void remove_file(const std::string &path)
     {
         std::string cmd = "rm " + path;
         system(cmd.c_str());
-    }
-
-    void remove_realm_files(const std::string &path)
-    {
-        remove_file(path);
-        remove_file(path + ".lock");
-        remove_file(path + ".note");
-        remove_directory(path + ".management");
     }
 }
